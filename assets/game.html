@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+<body>
+
+    <header>
+        <h2>The Psychic Game</h1>
+    </header>
+
+	<div class="container">
+                <div class="wrapper">
+    
+                    <h2>Wins:</h3>
+                        <div id="wins"></div>
+    
+                    <h2>Losses:</h3>
+                        <div id="loss"></div>
+    
+                    <p>Guesses Remaining:</p>
+                        <div id="attempts"></div>
+                
+                    <p>Letter Already Guessed:</p>
+    
+                        <div id="guess"></div>
+                </div>
+    </div>
+
+<script type="text/javascript">
+    
+    
+//Initializing
+var wins = 0;
+var loss = 0;
+var attempts = 10;
+var usedArray = [];
+var randomLetter = randomLetter;
+var alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+//Generate random number from 0-1 * 26 then rounded
+randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+console.log(randomLetter);
+
+//Uses random whole number generated above to select a random letter from the array [alphabet] and assigns it to the var randomLetter
+function randomGuess() {
+      randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+      console.log(randomLetter);
+
+}
+
+    //Takes in player input
+    document.onkeyup = function (event) {
+    var guess = event.key;
+
+
+    //Correct guesses. Increment wins by 1, attempts stays the same, logs letter into usedArray
+      if (guess === randomLetter) {
+            wins++;
+            attempts = 10;
+            usedArray = [];
+      }
+
+      //HANDELING INCORRECT GUESSES
+      //tests if players guess Does Not Equal randomLetter and decriments attempts by 1
+      randomGuess();
+      if (guess !== randomLetter) {
+            attempts--;
+
+      }
+
+      //Remaining attempts = 0. Loss++, attempts reset to 10, usedArray is cleared.
+      if (attempts == 0) {
+            loss++;
+            usedArray = [];
+            attempts = 10;
+      }
+
+      //Prevents letter from being used twice.
+      if (usedArray.indexOf(guess) >= 0) {
+
+      } else {
+            //Adds incorrect guesses to usedArray & outputs to HTML
+            usedArray.push(guess);
+            document.getElementById('guess').innerHTML = usedArray;
+            console.log(usedArray);
+
+      }
+      //OUTPUT TO HTML
+      //these statements write the values/scores generated to the HTML
+      document.getElementById('wins').innerHTML = wins;
+      document.getElementById('loss').innerHTML = loss;
+      document.getElementById('attempts').innerHTML = attempts;
+
+}
+    </script>
+</body>
