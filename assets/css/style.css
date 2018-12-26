@@ -1,0 +1,21 @@
+body {
+    background-image: url("../images/Meow.jpg");
+    font-family: 'Major Mono Display', monospace;
+    font-size: 20px;
+}
+
+.container {
+    background-color: wheat;
+    padding: 25px;
+    margin: 50px 175px 50px 175px;
+    border-radius: 10px;
+}
+
+h2 {
+    display: block;
+    text-align: left;
+}
+
+#win, #loss, #attempts, #guess {
+    font-size: 18px;
+}
